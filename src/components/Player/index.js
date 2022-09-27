@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import Button from "../Button";
+import CalcButton from "../CalcButton";
 
 const Player = ({ name, score }) => {
   return (
     <PlayerItem>
       <PlayerName>{name}</PlayerName>
       <ScoreArea>
-        <Button text="-" width="1.4rem" height="1.4rem" />
+        <CalcButton>-</CalcButton>
         <PlayerScore>{score}</PlayerScore>
-        <Button width="1.4rem" height="1.4rem" />
+        <CalcButton>+</CalcButton>
       </ScoreArea>
     </PlayerItem>
   );

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+const CalcButton = styled.button`
   border-radius: 0.5rem;
   border: 2px solid black;
-  width: 15rem;
-  height: 2rem;
+  width: 1.4rem;
+  height: 1.4rem;
 `;
 
-export default Button;
+export default CalcButton;

@@ -3,14 +3,15 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 import Player from "./components/Player";
+import NewPlayer from "./components/PlayerForm";
 
 function App() {
   const [players, setPlayers] = useState([]);
-  const [newPlayer, setNewPlayer] = useState("");
 
   const onCreatePlayer = (event) => {
     event.preventDefault();
-
+    console.log(event.target.elements);
+    const newPlayer = event.target.elements.newPlayer.value;
     newPlayer &&
       setPlayers((players) => [
         ...players,
@@ -20,7 +21,7 @@ function App() {
           score: 0,
         },
       ]);
-    setNewPlayer("");
+    event.target.reset();
   };
 
   const onAdd = (playerId) => {
@@ -63,14 +64,7 @@ function App() {
         </PlayerList>
         <ResetButton onClick={onResetScores}>Reset scores</ResetButton>
         <ResetButton onClick={onResetAll}>Reset all</ResetButton>
-        <PlayerForm onSubmit={onCreatePlayer}>
-          <Header2>Add Player:</Header2>
-          <NewPlayer
-            onChange={(event) => setNewPlayer(event.target.value)}
-            name="newPlayer"
-            value={newPlayer}
-          />
-        </PlayerForm>
+        <NewPlayer onCreatePlayer={onCreatePlayer} />
       </PlayerContainer>
     </Main>
   );
@@ -88,25 +82,12 @@ const Header = styled.h1`
   padding: 1em;
 `;
 
-const Header2 = styled.h2`
-  margin-top: auto;
-`;
-
 const PlayerList = styled.ul`
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
-`;
-
-const NewPlayer = styled.input`
-  height: 2rem;
-  width: 20rem;
-  font-size: 1.2em;
-  padding: 0.2em;
-  border: 2px solid black;
-  margin-top: 0.5rem;
 `;
 
 const PlayerContainer = styled.section`
@@ -125,11 +106,4 @@ const ResetButton = styled.button`
   border: 2px solid black;
   width: 10rem;
   padding: 0.5rem;
-`;
-
-const PlayerForm = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 `;

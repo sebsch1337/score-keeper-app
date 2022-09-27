@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import CalcButton from "../CalcButton";
 
-const Player = ({ name, score }) => {
+const Player = ({ name, score, onAdd, onSubtract }) => {
   return (
     <PlayerItem>
       <PlayerName>{name}</PlayerName>
       <ScoreArea>
-        <CalcButton>-</CalcButton>
+        <CalcButton onClick={onSubtract}>-</CalcButton>
         <PlayerScore>{score}</PlayerScore>
-        <CalcButton>+</CalcButton>
+        <CalcButton onClick={onAdd}>+</CalcButton>
       </ScoreArea>
     </PlayerItem>
   );

@@ -9,10 +9,6 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [newPlayer, setNewPlayer] = useState("");
 
-  useEffect(() => {
-    console.log(players);
-  }, [players]);
-
   const onCreateNewPlayer = (event) => {
     event.preventDefault();
     setPlayers((players) => [
@@ -26,23 +22,54 @@ function App() {
     setNewPlayer("");
   };
 
+  const onAdd = (playerId) => {
+    setPlayers((players) =>
+      players.map((player) => ({
+        ...player,
+        score: player.id === playerId ? player.score++ : player.score,
+      }))
+    );
+  };
+
+  const onSubtract = (playerId) => {
+    setPlayers((players) =>
+      players.map((player) => ({
+        ...player,
+        score: player.id === playerId ? player.score-- : player.score,
+      }))
+    );
+  };
+
+  const onResetScores = () =>
+    setPlayers((players) => players.map((player) => ({ ...player, score: 0 })));
+
+  const onResetAll = () => setPlayers([]);
+
   return (
     <Main>
       <Header>Scorekeeper Version A</Header>
-      <PlayerForm onSubmit={onCreateNewPlayer}>
+      <PlayerContainer>
         <PlayerList>
           {players.map((player) => (
-            <Player key={player.id} name={player.name} score={player.score} />
+            <Player
+              key={player.id}
+              name={player.name}
+              score={player.score}
+              onAdd={() => onAdd(player.id)}
+              onSubtract={() => onSubtract(player.id)}
+            />
           ))}
         </PlayerList>
-        <ResetButton>Reset scores</ResetButton>
-        <ResetButton>Reset all</ResetButton>
-        <Header2>Add Player:</Header2>
-        <NewPlayer
-          onChange={(event) => setNewPlayer(event.target.value)}
-          value={newPlayer}
-        />
-      </PlayerForm>
+        <ResetButton onClick={onResetScores}>Reset scores</ResetButton>
+        <ResetButton onClick={onResetAll}>Reset all</ResetButton>
+        <PlayerForm onSubmit={onCreateNewPlayer}>
+          <Header2>Add Player:</Header2>
+          <NewPlayer
+            onChange={(event) => setNewPlayer(event.target.value)}
+            value={newPlayer}
+          />
+        </PlayerForm>
+      </PlayerContainer>
     </Main>
   );
 }
@@ -71,3 +98,14 @@ const PlayerList = styled.ul`
 `;
 
 const NewPlayer = styled.input``;
+
+const PlayerContainer = styled.section`
+  width: 25rem;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1em;
+  gap: 1em;
+`;

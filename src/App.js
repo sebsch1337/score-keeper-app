@@ -31,7 +31,7 @@ const Header = styled.h1`
 `;
 
 const PlayerList = styled.ul`
-  width: 90%;
+  width: 80%;
   display: flex;
   justify-content: center;
 `;

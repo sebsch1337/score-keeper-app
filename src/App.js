@@ -8,16 +8,18 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [newPlayer, setNewPlayer] = useState("");
 
-  const onCreateNewPlayer = (event) => {
+  const onCreatePlayer = (event) => {
     event.preventDefault();
-    setPlayers((players) => [
-      ...players,
-      {
-        id: uuid().slice(0, 8),
-        name: newPlayer,
-        score: 0,
-      },
-    ]);
+
+    newPlayer &&
+      setPlayers((players) => [
+        ...players,
+        {
+          id: uuid().slice(0, 8),
+          name: newPlayer,
+          score: 0,
+        },
+      ]);
     setNewPlayer("");
   };
 
@@ -61,10 +63,11 @@ function App() {
         </PlayerList>
         <ResetButton onClick={onResetScores}>Reset scores</ResetButton>
         <ResetButton onClick={onResetAll}>Reset all</ResetButton>
-        <PlayerForm onSubmit={onCreateNewPlayer}>
+        <PlayerForm onSubmit={onCreatePlayer}>
           <Header2>Add Player:</Header2>
           <NewPlayer
             onChange={(event) => setNewPlayer(event.target.value)}
+            name="newPlayer"
             value={newPlayer}
           />
         </PlayerForm>

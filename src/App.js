@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import ResetButton from "./components/ResetButton";
-import Player from "./components/Player";
-import PlayerForm from "./components/PlayerForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuid } from "uuid";
+
+import Player from "./components/Player";
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -95,9 +94,17 @@ const PlayerList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 0.5rem;
 `;
 
-const NewPlayer = styled.input``;
+const NewPlayer = styled.input`
+  height: 2rem;
+  width: 20rem;
+  font-size: 1.2em;
+  padding: 0.2em;
+  border: 2px solid black;
+  margin-top: 0.5rem;
+`;
 
 const PlayerContainer = styled.section`
   width: 25rem;
@@ -108,4 +115,18 @@ const PlayerContainer = styled.section`
   justify-content: flex-start;
   padding: 1em;
   gap: 1em;
+`;
+
+const ResetButton = styled.button`
+  border-radius: 0.5rem;
+  border: 2px solid black;
+  width: 10rem;
+  padding: 0.5rem;
+`;
+
+const PlayerForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;

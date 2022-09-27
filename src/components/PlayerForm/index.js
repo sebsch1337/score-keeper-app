@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ScoreBox = styled.section`
+const PlayerForm = styled.form`
   width: 25rem;
   height: 30rem;
   border: 3px solid black;
@@ -12,4 +12,4 @@ const ScoreBox = styled.section`
   gap: 1em;
 `;
 
-export default ScoreBox;
+export default PlayerForm;

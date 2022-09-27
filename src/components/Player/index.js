@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import CalcButton from "../CalcButton";
 
-const Player = ({ name, score }) => {
+const Player = ({ name, score, onAdd, onSubtract }) => {
   return (
     <PlayerItem>
       <PlayerName>{name}</PlayerName>
       <ScoreArea>
-        <CalcButton>-</CalcButton>
+        <CalcButton onClick={onSubtract}>-</CalcButton>
         <PlayerScore>{score}</PlayerScore>
-        <CalcButton>+</CalcButton>
+        <CalcButton onClick={onAdd}>+</CalcButton>
       </ScoreArea>
     </PlayerItem>
   );
@@ -21,12 +20,21 @@ const PlayerItem = styled.li`
   justify-content: space-between;
 `;
 
-const PlayerName = styled.p``;
+const PlayerName = styled.p`
+  font-weight: bold;
+`;
 const PlayerScore = styled.p``;
 
 const ScoreArea = styled.span`
   display: flex;
   gap: 1em;
+`;
+
+const CalcButton = styled.button`
+  border-radius: 0.5rem;
+  border: 2px solid black;
+  width: 1.4rem;
+  height: 1.4rem;
 `;
 
 export default Player;
